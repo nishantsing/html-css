@@ -9,3 +9,4 @@
 
 ## HTML
 - [The New selectedcontent HTML Element Changes Selects Forever](https://youtu.be/tNBufpGQihY)
+- [Easy Image Viewer JavaScript Application Engineering Tutorial](https://youtu.be/0yeVNhYRVZ4)
