@@ -43,9 +43,23 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6x 8px rgba(0, 0, 0, 0.2);
 
 ```
 
+### Codepip
+- [Codepip](https://codepip.com/games/flexbox-froggy/)
+
 #### Flexbox
 - [Flexbox Froggy](https://flexboxfroggy.com/)
 
+- Properties on container
+    - flex-direction: row | row-reverse | column | column-reverse
+    - justify-content: | start | end | center | space-between | space-around -> horizontal(row) | vertical(column)
+    - align-items -> vertical(row)
+    - align-content -> gap between each line
+    - flex-wrap: nowrap | wrap | wrap-reverse
+    - flex-flow: column wrap -> combines flex-direction and flex-wrap
+
+- properties on individual child element
+    - order: 0 (negative comes before 0 and positive comes after)
+    - align-self -> how items are aligned
 
 #### Grid
 - [Grid Garden](https://cssgridgarden.com/)
