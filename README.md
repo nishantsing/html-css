@@ -50,6 +50,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6x 8px rgba(0, 0, 0, 0.2);
 - [Flexbox Froggy](https://flexboxfroggy.com/)
 
 - Properties on container
+    - display:flex
     - flex-direction: row | row-reverse | column | column-reverse
     - justify-content: | start | end | center | space-between | space-around -> horizontal(row) | vertical(column)
     - align-items -> vertical(row)
@@ -63,3 +64,19 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6x 8px rgba(0, 0, 0, 0.2);
 
 #### Grid
 - [Grid Garden](https://cssgridgarden.com/)
+
+- properites on container
+    - display: grid;
+    - grid-template-colums: | 1fr | 0 | repeat(4, 1fr) | % | px
+    - grid-template-rows:
+    - grid-template -> shorthand for above 2 properties
+
+- properties on individual child elements
+    - grid-row-start
+    - grid-row-end
+    - grid-row -> shorthand for above 2
+    - grid-column-start
+    - grid-column-end
+    - grid-column -> shorthand for above 2
+    - grid-area -> shorthand for grid-row and grid-column
+
