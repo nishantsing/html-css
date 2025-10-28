@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Understanding CSS</title>
+    <style>
+        /* 
+        can also be done by giving the container relative and label inside the container and giving label absolute
+        */
+        :root {
+            --bg-color: lightblue;
+            --box-padding: 5px;
+        }
+
+        .container {
+            width: fit-content;
+            text-decoration: underline;
+            anchor-name: --a1;
+            cursor: pointer;
+        }
+
+        #label {
+            position: absolute;
+            position-anchor: --a1;
+            position-area: bottom right;
+            padding: var(--box-padding);
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            width: fit-content;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            /* transform: translateX(-50%); */
+            /* display: none */
+        }
+
+        .container:hover+#label {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="anchor">
+        Hover me
+    </div>
+    <label for="" id="label">This is a Tooltip</label>
+</body>
+
+</html>
