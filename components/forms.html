@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+
+</head>
+
+<body>
+    <!-- 
+        action -> the server url where to send data
+        method -> type of method
+        post - for sensitive data
+        get - for search
+    -->
+    <form action="">
+        <div>
+            <!-- 
+                1. In label "for" attribute is for accessibility for visually blind and clicking it activates the input field linked with same id.
+                2. label for attribute should be same as the input id attribute
+                3. data is send as name attribute (first_name = "John")
+            -->
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your name">
+        </div>
+        <div>
+            <label for="user_password">Password:</label>
+            <input type="password" id="user_password" placeholder="Enter your Password">
+        </div>
+        <div>
+            <label for="user_email">Email:</label>
+            <input type="email" id="user_email" placeholder="Enter your Email" required>
+        </div>
+
+        <div>
+            <p>Choose your favorite color:</p>
+            <!-- 
+                1. All grouped button should have same name.
+                2. value attribute value is sent (favorite_color = red)
+             
+            -->
+            <input type="radio" id="red" name="favorite_color" value="red">
+            <label for="red">Red</label>
+
+            <input type="radio" id="blue" name="favorite_color" value="blue">
+            <label for="blue">Blue</label>
+
+            <input type="radio" id="green" name="favorite_color" value="green">
+            <label for="green">Green</label>
+        </div>
+
+        <div>
+            <p>Choose your interests:</p>
+            <!-- 
+                1. No same name as we want to get value if its selected.
+                2. value attribute value is sent (interest_tech = tech)
+             
+            -->
+            <input type="checkbox" id="tech" name="interest_tech" value="tech">
+            <label for="tech">Technology</label>
+
+            <input type="checkbox" id="sports" name="interest_sports" value="sports">
+            <label for="sports">Sports</label>
+
+            <input type="checkbox" id="music" name="interest_music" value="music">
+            <label for="music">Music</label>
+        </div>
+
+        <div>
+            <label for="hear_about">How did you hear about us?</label>
+            <select name="hear_about" id="hear_about">
+                <option value="search">Search</option>
+                <option value="friend">Friend</option>
+                <option value="social">Social</option>
+                <option value="other">Other</option>
+            </select>
+
+        </div>
+
+        <div>
+            <label for="user_message"> Your Message:</label>
+            <textarea name="user_message" id="user_message" rows="5" cols="30"
+                placeholder="Type your message here..."></textarea>
+        </div>
+        <br>
+        <!-- Prefer button as we can have icons as well -->
+        <div>
+            <input type="submit" value="Send Data!!!">
+        </div>
+        <br>
+        <div>
+            <button type="submit">Send Data!!!</button>
+        </div>
+
+        <div>
+            <button type="reset">Clear Form</button>
+        </div>
+
+
+
+    </form>
+
+    <script>
+        const nameEle = document.getElementById('first_name');
+        // const form = document.getElementsByTagName('form')[0];
+        const form = document.querySelector('form')
+        // console.log(form)
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            // Process formData here (e.g., send via fetch)
+            console.log("Form data:", Object.fromEntries(formData.entries()));
+            // {first_name: 'Nishant', hear_about: 'search', user_message: ''}
+            let name = nameEle.value
+
+
+            console.log({ name })
+        })
+    </script>
+
+    <!-- 
+        for...in loops over object property names, not iterable values.
+
+        FormData is not a plain object — it’s an iterable, not enumerable like {}.
+
+        So for...in won’t iterate through form fields.
+
+        Also, formData[entry] doesn’t access field values — FormData has no such property.
+        const data = {};
+
+        You can use below one
+        for (const [key, value] of formData) {
+        data[key] = value;
+        }
+
+        console.log(data);
+        OR
+        const data = Object.fromEntries(formData);
+        OR 
+        Object.fromEntries(formData.entries())
+
+        🧩 1. Iterables vs Enumerables — the core difference
+        Concept	What it means	Used by	Example
+        Iterable	Something you can loop over with for...of	Iteration protocols	Array, Map, Set, FormData, String, etc.
+        Enumerable	Something whose properties show up in for...in or Object.keys()
+
+        const arr = [10, 20, 30];
+        for (const value of arr) {
+        console.log(value);
+        }
+        ✅ Works, because arrays are iterable — they implement the iterator protocol via Symbol.iterator.
+
+        const obj = { a: 1, b: 2 };
+        for (const key in obj) {
+        console.log(key, obj[key]);
+        }
+        ✅ Works, because objects are enumerable — they expose key-value pairs as properties.
+
+        An object is iterable if it has a method under the key Symbol.iterator that returns an iterator object.
+
+        Example:
+        const arr = [1, 2, 3];
+        console.log(typeof arr[Symbol.iterator]); 
+        // function → ✅ means it's iterable
+
+
+        You can even manually use that iterator:
+
+        const iterator = arr[Symbol.iterator]();
+        console.log(iterator.next()); // { value: 1, done: false }
+        console.log(iterator.next()); // { value: 2, done: false }
+
+        Example: Non-iterable (plain object)
+        const obj = { a: 1, b: 2 };
+        console.log(typeof obj[Symbol.iterator]); // undefined ❌
+
+
+        Hence, for...of obj → ❌ TypeError.
+
+        Every iterable defines its default iterator function under Symbol.iterator.
+        Type	Default iterator yields	Example
+        Array	element values	[1,2,3] → 1, 2, 3
+        String	characters	'hi' → 'h', 'i'
+        Map	[key, value] pairs	new Map([['a',1]])
+        Set	values	new Set([1,2])
+        FormData	[key, value] pairs	new FormData()
+        console.log(FormData.prototype[Symbol.iterator] === FormData.prototype.entries);
+
+        4. Enumerable properties
+
+        A property is enumerable if it shows up in:
+
+        for...in
+
+        Object.keys(obj)
+
+        Object.entries(obj)
+
+        You can check enumerability like this:
+
+        const obj = { a: 1 };
+        console.log(Object.getOwnPropertyDescriptor(obj, 'a').enumerable); // true
+
+
+        Some built-in methods or prototype methods are non-enumerable:
+
+        console.log(Object.getOwnPropertyDescriptor(Array.prototype, 'push').enumerable);
+        // false
+
+
+        That’s why for...in on arrays only shows indices, not methods.
+
+        5. How to check if an object is iterable or enumerable
+        ✅ Check for iterable
+        function isIterable(obj) {
+        return obj != null && typeof obj[Symbol.iterator] === "function";
+        }
+
+        console.log(isIterable([])); // true
+        console.log(isIterable("abc")); // true
+        console.log(isIterable({})); // false
+
+        ✅ Check for enumerable keys
+        const obj = { a: 1, b: 2 };
+        console.log(Object.keys(obj)); // ['a', 'b']
+    -->
+</body>
+
+</html>
